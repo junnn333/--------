@@ -63,17 +63,49 @@ wrangler publish
 
 ## パスワード設定
 
-`js/auth.js` の以下の行でパスワードを設定できます：
+`src/index.js` の以下の行でパスワードを設定できます：
 
 ```javascript
 const CORRECT_PASSWORD = 'portfolio2025';
 ```
 
+**本番環境では、Cloudflareのシークレット機能を使用してください：**
+```bash
+wrangler secret put CORRECT_PASSWORD
+```
+
 ## セキュリティに関する注意
 
-- このポートフォリオはクライアント側のJavaScriptでパスワード認証を行っています
-- より高いセキュリティが必要な場合は、サーバー側での認証を実装してください
-- パスワードは環境変数などで管理することをお勧めします
+✅ **改善：サーバー側認証を実装**
+- パスワードはCloudflare Workersのサーバー側で検証されます
+- クライアント側のソースコードではパスワードは見えません
+- HTTPOnly Cookieを使用してセッショントークンを管理
+
+### より高いセキュリティのために
+
+本番環境では、以下を実装してください：
+
+1. **環境変数でパスワード管理**
+```bash
+wrangler secret put PORTFOLIO_PASSWORD
+```
+
+2. **src/index.js を編集**
+```javascript
+const CORRECT_PASSWORD = env.PORTFOLIO_PASSWORD;
+```
+
+3. **JWT（JSON Web Token）の使用**
+```javascript
+import { SignJWT } from 'jose';
+// トークン署名
+```
+
+4. **Rate Limiting（レート制限）**
+- ブルートフォース攻撃対策
+
+5. **HTTPS/セキュアなCookie設定**
+- 自動的に有効（Cloudflare Pages）
 
 ## カスタマイズ
 

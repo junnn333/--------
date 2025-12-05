@@ -13,8 +13,11 @@
             <h1>Portfolio</h1>
             <p>このページはパスワードで保護されています</p>
             <input type="password" id="passwordInput" placeholder="パスワードを入力してください" onkeypress="handleKeyPress(event)">
-            <button onclick="authenticate()">アクセス</button>
+            <button onclick="authenticate()" id="authBtn">アクセス</button>
             <p id="errorMsg" class="error-msg"></p>
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+            </div>
         </div>
     </div>
 

@@ -1,9 +1,22 @@
 name = "portfolio"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
+type = "javascript"
+
+[site]
+bucket = "."
 
 [env.production]
 name = "portfolio-prod"
 routes = [
   { pattern = "example.com/*", zone_name = "example.com" }
 ]
+
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+# 環境変数でパスワードを設定（本番環境推奨）
+# wrangler secret put PORTFOLIO_PASSWORD
+# で、パスワードを登録してください
+[vars]
+PORTFOLIO_PASSWORD = "portfolio2025"
