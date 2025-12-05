@@ -1,0 +1,9 @@
+name = "portfolio"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[env.production]
+name = "portfolio-prod"
+routes = [
+  { pattern = "example.com/*", zone_name = "example.com" }
+]

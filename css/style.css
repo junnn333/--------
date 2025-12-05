@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+/* Authentication Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-box h1 {
+    margin-bottom: 10px;
+    color: #667eea;
+    font-size: 2.5em;
+}
+
+.auth-box p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.auth-box input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.auth-box button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.auth-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: none;
+}
+
+.error-msg.show {
+    display: block;
+}
+
+/* Main Content */
+.main-content {
+    background: white;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.nav-menu a:hover {
+    opacity: 0.8;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.section h2 {
+    font-size: 2em;
+    color: #667eea;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #667eea;
+}
+
+/* Profile */
+.profile-content {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.profile-text p {
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    line-height: 1.8;
+}
+
+.profile-text strong {
+    color: #667eea;
+}
+
+.profile-text hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Skills */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.skill-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    border-top: 4px solid #667eea;
+    transition: transform 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+}
+
+.skill-card h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.skill-card ul {
+    list-style-position: inside;
+}
+
+.skill-card li {
+    padding: 8px 0;
+    color: #555;
+}
+
+/* Works */
+.works-container {
+    display: grid;
+    gap: 25px;
+}
+
+.work-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #764ba2;
+    transition: box-shadow 0.3s;
+}
+
+.work-card:hover {
+    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.1);
+}
+
+.work-card h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.work-content h4 {
+    color: #555;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.work-content p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.work-content ul {
+    list-style-position: inside;
+    margin-bottom: 10px;
+}
+
+.work-content li {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.highlight {
+    background: white;
+    padding: 12px;
+    border-left: 3px solid #667eea;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: #555;
+}
+
+/* Qualifications */
+.qualifications-list {
+    display: grid;
+    gap: 15px;
+}
+
+.qualification-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.qualification-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: #667eea;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.qualification-item p {
+    margin: 0;
+    color: #555;
+    font-size: 1.05em;
+}
+
+/* Footer */
+footer {
+    background: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    border-top: 1px solid #eee;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .section h2 {
+        font-size: 1.5em;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-box {
+        margin: 20px;
+    }
+}
