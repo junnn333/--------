@@ -1,7 +1,9 @@
 /**
- * Cloudflare Workers 連携版
- * サーバー側でパスワード検証を行い、セッショントークンを取得します
+ * 認証システム
+ * フロントエンド版（将来的にバックエンド + DB対応予定）
  */
+
+
 
 const AUTH_KEY = 'portfolioAuthToken';
 const AUTH_TIMESTAMP_KEY = 'portfolioAuthTimestamp';
