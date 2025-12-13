@@ -1,22 +1,16 @@
 name = "portfolio"
-main = "src/index.js"
-compatibility_date = "2025-01-01"
 type = "javascript"
+compatibility_date = "2024-01-01"
 
-[site]
-bucket = "."
-
+# Pages Functions設定
 [env.production]
 name = "portfolio-prod"
-routes = [
-  { pattern = "example.com/*", zone_name = "example.com" }
-]
+vars = { PORTFOLIO_PASSWORD = "your-password-here" }
 
+# 開発環境
 [env.development]
-vars = { ENVIRONMENT = "development" }
+vars = { PORTFOLIO_PASSWORD = "dev-password" }
 
-# 環境変数でパスワードを設定（本番環境推奨）
-# wrangler secret put PORTFOLIO_PASSWORD
-# で、パスワードを登録してください
-[vars]
-PORTFOLIO_PASSWORD = "portfolio2025"
+# Pages設定
+pages_build_output_dir = ""
+
