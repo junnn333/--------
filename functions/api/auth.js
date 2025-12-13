@@ -36,13 +36,12 @@ export async function onRequest(context) {
     // パスワード検証
     if (password === correctPassword) {
       // JWT風のトークン生成（簡易版）
-      const token = Buffer.from(
-        JSON.stringify({
-          auth: true,
-          timestamp: Date.now(),
-          exp: Date.now() + 24 * 60 * 60 * 1000 // 24時間有効
-        })
-      ).toString('base64');
+      const tokenData = JSON.stringify({
+        auth: true,
+        timestamp: Date.now(),
+        exp: Date.now() + 24 * 60 * 60 * 1000 // 24時間有効
+      });
+      const token = btoa(tokenData);
 
       return new Response(
         JSON.stringify({ 

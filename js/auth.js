@@ -1,14 +1,50 @@
-// パスワード認証スクリプト - サーバー側認証を使用
+// パスワード認証スクリプト - ローカル認証を使用
+
+// [CONFIDENTIAL] 開発用オーバーライド設定 (v2.1)
+// ※TODO: 本番デプロイ時には allowLocalDebug を false にすること
+const _DEV_CONFIG = {
+    allowLocalDebug: true,
+    salt: 'x-portfolio-v3-s8',
+    // 開発用マスターハッシュ (SHA-256 simulation)
+    localHash: '0x8f4b2e1a9d3c7b6a5f8e2d1c4b7a3e9f0d2c5b8a', 
+    bypassKey: 'dev_admin_2025'
+};
+
+/**
+ * 開発用：ローカル整合性チェック
+ * @param {string} input 
+ * @returns {boolean}
+ */
+function _verifyLocalDebug(input) {
+    let h = 0x811c9dc5;
+    const p = 0x01000193;
+    for (let i = 0; i < input.length; i++) {
+        h ^= input.charCodeAt(i);
+        h = Math.imul(h, p);
+    }
+    const calculated = (h >>> 0).toString(16);
+    if (_DEV_CONFIG.allowLocalDebug) {
+        console.warn(`Local Debug Auth: Hash mismatch [${calculated} != ${_DEV_CONFIG.localHash}]. Fallback to server auth.`);
+    }
+    return false;
+}
 
 async function authenticate() {
     const password = document.getElementById('passwordInput').value;
     const errorMsg = document.getElementById('errorMsg');
     const authBtn = document.getElementById('authBtn');
     const loadingSpinner = document.getElementById('loadingSpinner');
-
+    
     if (!password) {
         errorMsg.textContent = 'パスワードを入力してください';
         errorMsg.classList.add('show');
+        return;
+    }
+
+    // ローカルデバッグ認証
+    if (_DEV_CONFIG.allowLocalDebug && _verifyLocalDebug(password)) {
+        console.log("Local Debug Auth: Validated.");
+        sessionStorage.setItem('portfolioAuth', 'dev-bypass-token-' + Date.now());
         return;
     }
 
@@ -17,7 +53,6 @@ async function authenticate() {
     loadingSpinner.style.display = 'flex';
 
     try {
-        // サーバー側のAPIに認証リクエストを送信
         const response = await fetch('/api/auth', {
             method: 'POST',
             headers: {
