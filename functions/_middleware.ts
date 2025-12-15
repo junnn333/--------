@@ -1,26 +1,25 @@
-export default {
-  async fetch(request: Request): Promise<Response> {
-    const url = new URL(request.url);
-    const pathname = url.pathname;
+export const onRequest: PagesFunction = async (context) => {
+  const { request, next } = context;
+  const url = new URL(request.url);
+  const pathname = url.pathname;
 
-    // パブリックパス（認証不要）
-    const publicPaths = ['/login.html', '/api/login', '/', '/login'];
+  // パブリックパス（認証不要）
+  const publicPaths = ['/login.html', '/api/login', '/', '/login'];
 
-    if (publicPaths.includes(pathname)) {
-      return fetch(request);
-    }
-
-    // クッキーをチェック
-    const cookie = request.headers.get('cookie') || '';
-    const hasAuthToken = cookie.includes('auth_token=');
-
-    if (!hasAuthToken) {
-      return new Response(null, {
-        status: 302,
-        headers: { 'Location': '/login.html' }
-      });
-    }
-
-    return fetch(request);
+  if (publicPaths.includes(pathname)) {
+    return next();
   }
+
+  // クッキーをチェック
+  const cookie = request.headers.get('cookie') || '';
+  const hasAuthToken = cookie.includes('auth_token=');
+
+  if (!hasAuthToken) {
+    return new Response(null, {
+      status: 302,
+      headers: { 'Location': '/login.html' }
+    });
+  }
+
+  return next();
 };
