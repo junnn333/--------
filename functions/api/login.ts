@@ -45,6 +45,10 @@ export const onRequest: PagesFunction = async (context) => {
     const body: LoginRequest = await request.json();
     const password = body.password || '';
 
+    console.log('Received password:', password);
+    console.log('Expected password:', CORRECT_PASSWORD);
+    console.log('Match:', password === CORRECT_PASSWORD);
+
     if (password === CORRECT_PASSWORD) {
       const timestamp = Date.now();
       const token = await generateToken(password, timestamp);
