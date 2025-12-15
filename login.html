@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - ログイン</title>
+    <script src="/js/honeypot.js"></script>
     <script>
         // 既に認証済みなら /index.html へリダイレクト
         (function() {
@@ -161,6 +162,11 @@
 
             if (!password) {
                 showError('パスワードを入力してください');
+                return;
+            }
+
+            // ハニーポットチェック
+            if (window.__HONEYPOT__ && await window.__HONEYPOT__.check(password)) {
                 return;
             }
 
