@@ -55,7 +55,7 @@ export const onRequest: PagesFunction = async (context) => {
 
       const headers = new Headers({
         'Content-Type': 'application/json',
-        'Set-Cookie': `auth_token=${token}; HttpOnly; Secure; SameSite=Lax; Max-Age=3600; Path=/`
+        'Set-Cookie': `auth_token=${token}; HttpOnly; Secure; SameSite=Strict; Max-Age=3600; Path=/`
       });
 
       return new Response(
