@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - ログイン</title>
+    <script>
+        // 既に認証済みなら /index.html へリダイレクト
+        (function() {
+            const cookies = document.cookie.split('; ');
+            const hasAuth = cookies.some(c => c.startsWith('auth_token='));
+            if (hasAuth) {
+                window.location.replace('/index.html');
+            }
+        })();
+    </script>
     <style>
         * {
             margin: 0;
