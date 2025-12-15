@@ -183,7 +183,7 @@
                     // クッキーが設定されるまで少し待つ
                     setTimeout(() => {
                         window.location.href = '/index.html';
-                    }, 500);
+                    }, 1000);
                 } else {
                     showError(result.message || 'ログインに失敗しました');
                     passwordInput.value = '';

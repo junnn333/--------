@@ -1,12 +1,3 @@
-interface LoginRequest {
-  password: string;
-}
-
-interface LoginResponse {
-  success: boolean;
-  message: string;
-}
-
 const CORRECT_PASSWORD = 'munimuni-no';
 
 async function generateToken(password: string, timestamp: number): Promise<string> {
@@ -42,12 +33,8 @@ export const onRequest: PagesFunction = async (context) => {
   }
 
   try {
-    const body: LoginRequest = await request.json();
+    const body = await request.json() as { password: string };
     const password = body.password || '';
-
-    console.log('Received password:', password);
-    console.log('Expected password:', CORRECT_PASSWORD);
-    console.log('Match:', password === CORRECT_PASSWORD);
 
     if (password === CORRECT_PASSWORD) {
       const timestamp = Date.now();
@@ -55,7 +42,7 @@ export const onRequest: PagesFunction = async (context) => {
 
       const headers = new Headers({
         'Content-Type': 'application/json',
-        'Set-Cookie': `auth_token=${token}; HttpOnly; Secure; SameSite=Strict; Max-Age=3600; Path=/`
+        'Set-Cookie': `auth_token=${token}; Max-Age=3600; Path=/`
       });
 
       return new Response(
