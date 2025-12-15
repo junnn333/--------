@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        // 認証チェック
+        (function() {
+            const cookies = document.cookie.split('; ');
+            const hasAuth = cookies.some(c => c.startsWith('auth_token='));
+            
+            console.log('Index page loaded');
+            console.log('All cookies:', document.cookie);
+            console.log('Has auth token:', hasAuth);
+            
+            if (!hasAuth) {
+                console.log('No auth token found, redirecting to login');
+                window.location.replace('/login.html');
+            }
+        })();
+    </script>
 </head>
 <body>
     <nav class="navbar">

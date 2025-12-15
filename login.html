@@ -180,10 +180,12 @@
 
                 if (result.success) {
                     console.log('Login successful');
-                    // クッキーが設定されるまで少し待つ
+                    console.log('Response headers:', response.headers.get('set-cookie'));
+                    // クッキーが設定されるまで待つ（Cloudflare での処理待ち）
                     setTimeout(() => {
+                        console.log('Checking cookies:', document.cookie);
                         window.location.href = '/index.html';
-                    }, 500);
+                    }, 1000);
                 } else {
                     showError(result.message || 'ログインに失敗しました');
                     passwordInput.value = '';
