@@ -1,16 +1,14 @@
 name = "portfolio"
-type = "javascript"
-compatibility_date = "2024-01-01"
+main = "functions/_middleware.ts"
+compatibility_date = "2025-01-01"
 
-# Pages Functions設定
+[build]
+command = "npm install"
+cwd = "./functions"
+watch_paths = ["src/**/*.ts"]
+
 [env.production]
-name = "portfolio-prod"
-vars = { PORTFOLIO_PASSWORD = "your-password-here" }
-
-# 開発環境
-[env.development]
-vars = { PORTFOLIO_PASSWORD = "dev-password" }
-
-# Pages設定
-pages_build_output_dir = ""
+routes = [
+  { pattern = "muni-no.net", zone_name = "muni-no.net" }
+]
 

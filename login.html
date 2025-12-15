@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - ログイン</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h1 {
+            margin-bottom: 10px;
+            color: #667eea;
+            font-size: 2.5em;
+        }
+
+        .login-container p {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .login-container input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .login-container button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-container button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Portfolio</h1>
+        <p>このページはパスワードで保護されています</p>
+        
+        <form onsubmit="handleSubmit(event)">
+            <input 
+                type="password" 
+                id="passwordInput" 
+                placeholder="パスワードを入力してください"
+                required
+            >
+            <button type="submit" id="loginBtn">アクセス</button>
+            <p id="errorMsg" class="error-msg"></p>
+            <div id="loadingSpinner" class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+            await authenticate();
+        }
+
+        async function authenticate() {
+            const passwordInput = document.getElementById('passwordInput');
+            const password = passwordInput.value;
+            const errorMsg = document.getElementById('errorMsg');
+            const loginBtn = document.getElementById('loginBtn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            if (!password) {
+                showError('パスワードを入力してください');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loadingSpinner.style.display = 'flex';
+            errorMsg.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    window.location.href = '/index.html';
+                } else {
+                    showError(result.message || 'ログインに失敗しました');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('ネットワークエラーが発生しました');
+                passwordInput.focus();
+            } finally {
+                loginBtn.disabled = false;
+                loadingSpinner.style.display = 'none';
+            }
+        }
+
+        function showError(message) {
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = message;
+            errorMsg.style.display = 'block';
+        }
+
+        // ページロード時、既に認証済みならメインページへ
+        window.addEventListener('load', () => {
+            const cookies = document.cookie;
+            if (cookies.includes('auth_token=')) {
+                window.location.href = '/index.html';
+            }
+        });
+    </script>
+</body>
+</html>
