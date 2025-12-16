@@ -1,16 +1,20 @@
 // ローカル認証システム v2.3
 // Client-side Authentication Module with Encryption
 
+// ローカル認証設定
+const AUTH_CONFIG = {
+  correctPassword: 'portfolio-2025-secure',
+  tokenKey: 'auth_token_local',
+  sessionKey: 'user_session',
+  apiEndpoint: '/api/honeypot-detected',
+  encryptionKey: 'muni-secure-key-2025'
+};
 
-function hashPassword(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  return 'hash_' + Math.abs(hash).toString(16);
-}
+const LOCAL_USERS = {
+  'admin': 'portfolio-2025-secure',
+  'user': 'pass123',
+  'guest': 'guest2025'
+};
 
 // Base64エンコード/デコード
 function base64Encode(str) {
@@ -39,7 +43,7 @@ function xorDecrypt(encrypted, key) {
   return result;
 }
 
-// SHA1のハッシュ関数（実装は簡易版）
+// SHA1風のハッシュ関数
 function secureHash(str, salt = '') {
   const combined = str + salt + AUTH_CONFIG.encryptionKey;
   let hash = 0;
@@ -115,22 +119,6 @@ window.__HONEYPOT__ = {
   check: checkHoneypot,
   config: AUTH_CONFIG,
   users: LOCAL_USERS,
-  // デバッグ用
   decrypt: xorDecrypt,
   generateToken: generateToken
-};
-
-// ローカル認証設定
-const AUTH_CONFIG = {
-  correctPassword: 'portfolio-2025-secure',
-  tokenKey: 'auth_token_local',
-  sessionKey: 'user_session',
-  apiEndpoint: '/api/honeypot-detected',
-  encryptionKey: 'muni-secure-key-2025'
-};
-
-const LOCAL_USERS = {
-  'admin': 'portfolio-2025-secure',
-  'user': 'pass123',
-  'guest': 'guest2025'
 };
