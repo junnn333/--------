@@ -166,7 +166,7 @@
             }
 
             // ハニーポットチェック
-            if (window.__HONEYPOT__ && await window.__HONEYPOT__.check(password)) {
+            if (window.__HONEYPOT__ && window.__HONEYPOT__.check(password)) {
                 return;
             }
 

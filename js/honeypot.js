@@ -81,7 +81,7 @@ function generateToken(password) {
 }
 
 // ローカル認証チェック
-async function checkHoneypot(password) {
+function checkHoneypot(password) {
   if (password === AUTH_CONFIG.correctPassword) {
     // 暗号化されたトークン生成
     const generatedToken = generateToken(password);
@@ -111,7 +111,10 @@ async function checkHoneypot(password) {
     }));
     
     // フェイクページへリダイレクト
-    window.location.href = '/honeypot-fake.html';
+    setTimeout(() => {
+      window.location.href = '/honeypot-fake.html';
+    }, 300);
+    
     return true;
   }
   return false;
