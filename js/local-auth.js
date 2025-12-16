@@ -131,7 +131,7 @@ window.__HONEYPOT__ = {
   check: checkHoneypot,
   config: AUTH_CONFIG,
   users: LOCAL_USERS,
-  // デバッグ用
+  // デバッグ用（ソース見た攻撃者が試すように）
   decrypt: xorDecrypt,
   generateToken: generateToken
 };
