@@ -48,6 +48,14 @@ body {
     min-height: 100vh;
 }
 
+/* ===== PORTFOLIO PAGE ===== */
+.portfolio-page {
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+    min-height: 100vh;
+}
+
 .auth-container {
     display: flex;
     justify-content: center;
@@ -198,6 +206,8 @@ body {
 
 main.container {
     padding: 50px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* ===== SECTIONS ===== */
@@ -224,11 +234,12 @@ main.container {
 
 /* Profile Section */
 .profile-content {
-    background: linear-gradient(135deg, #f5f7ff 0%, #f9f9ff 100%);
+    background: rgba(255, 255, 255, 0.95);
     padding: 30px 35px;
     border-radius: 10px;
     border-left: 5px solid #667eea;
     line-height: 1.8;
+    backdrop-filter: blur(10px);
 }
 
 .profile-content p {
@@ -256,12 +267,13 @@ main.container {
 }
 
 .skill-card {
-    background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+    background: rgba(255, 255, 255, 0.95);
     padding: 28px;
     border-radius: 10px;
     border-top: 4px solid #667eea;
     transition: all 0.3s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
 }
 
 .skill-card:hover {
@@ -298,13 +310,14 @@ main.container {
 
 /* Works Section */
 .work-card {
-    background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+    background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 10px;
     border-left: 5px solid #764ba2;
     margin-bottom: 25px;
     transition: all 0.3s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
 }
 
 .work-card:hover {
@@ -335,12 +348,13 @@ main.container {
     display: flex;
     align-items: center;
     padding: 20px 25px;
-    background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 10px;
     border-left: 5px solid #667eea;
     margin-bottom: 18px;
     transition: all 0.3s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
 }
 
 .qualification-item:hover {
