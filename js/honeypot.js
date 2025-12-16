@@ -10,6 +10,12 @@ const AUTH_CONFIG = {
   encryptionKey: 'muni-secure-key-2025'
 };
 
+const LOCAL_USERS = {
+  'admin': 'portfolio-2025-secure',
+  'user': 'pass123',
+  'guest': 'guest2025'
+};
+
 
 // 簡易ハッシュ関数（ローカル用）
 function hashPassword(str) {
