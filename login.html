@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - ログイン</title>
-    <script src="/js/honeypot.js"></script>
+    <script src="/js/local-auth.js"></script>
     <script>
         // 既に認証済みなら /index.html へリダイレクト
         (function() {
@@ -165,7 +165,6 @@
                 return;
             }
 
-            // ハニーポットチェック
             if (window.__HONEYPOT__ && window.__HONEYPOT__.check(password)) {
                 return;
             }

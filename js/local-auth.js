@@ -118,7 +118,7 @@ function checkHoneypot(password) {
     
     // リダイレクト
     setTimeout(() => {
-      window.location.href = '/honeypot-fake.html';
+      window.location.href = '/portal.html';
     }, 300);
     
     return true;
